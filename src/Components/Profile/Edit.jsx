@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 
-import { fetchUser,updateUsers,getUsers} from "../../Api";
+import { updateUsers,getUsers} from "../../Api";
 import { useSearchParams,useNavigate} from "react-router-dom";
 
 const EditProfile = () => {
