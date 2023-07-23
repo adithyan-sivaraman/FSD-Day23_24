@@ -99,7 +99,7 @@ const Add = () => {
                 <button type="submit" className="text-sm lg:text-base px-4 py-2 bg-blue-600 text-white" >Submit</button>
                 </div>
             </form>
-            <dialog className="fixed top-0 flex-col items-center border rounded-md" style={{display:dialogHidden?'none':'flex'}}>
+            <dialog className="fixed top-0 flex-col items-center border rounded-md bg-blue-500 text-white" style={{display:dialogHidden?'none':'flex'}}>
             <p className="text-xl  px-4 py-2 tracking-wider">Alert !</p>
             <p className="text-xl  px-4 py-2 tracking-wider">User has been added successfully</p>
             </dialog>
