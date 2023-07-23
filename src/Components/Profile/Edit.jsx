@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from "react";
 
-import { fetchUser,updateUsers} from "../Api";
+import { fetchUser,updateUsers,getUsers} from "../../Api";
 import { useSearchParams,useNavigate} from "react-router-dom";
 
-const Edit = () => {
+const EditProfile = () => {
     const nav = useNavigate();
 
     const [param] = useSearchParams();
@@ -14,12 +14,13 @@ const Edit = () => {
         gender: '',
         picurl: '',
     }
-    const [formData, setFormData] = useState(initialState);
+    const [getData, getFormData] = useState(initialState);
     const id  = param.get("id")
     const loadUsers = async () => {
-        const response = await fetchUser(id);
-        setFormData(response)
+        const response = await getUsers();
+        getFormData(response)
         console.log(response)
+        
     }
 
     useEffect(() => {
@@ -32,9 +33,9 @@ const Edit = () => {
     const [dialogHidden,setDialogHidden] = useState(true)
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
+        console.log(getData)
         
-        const response = updateUsers(id,formData)
+        const response = updateUsers(id,getData)
         console.log(response)
         setDialogHidden(false)
         setTimeout(()=>{
@@ -45,8 +46,8 @@ const Edit = () => {
     }
     const handleChange = (e)=>{
         const {name,value} = e.target;
-        setFormData({
-            ...formData,
+        getFormData({
+            ...getData,
             [name]:value,
         });
         
@@ -60,7 +61,7 @@ const Edit = () => {
                     <label className="w-1/2 text-sm lg:text-base font-bold h-8 py-1" htmlFor="id" >Student ID</label>
                     <input 
                      onChange={handleChange} 
-                     value={formData.id}
+                     value={getData.id}
                      className="text-sm lg:text-base bg-blue-300 focus:bg-lime-300 px-2 h-8 w-1/2" 
                      type="text" 
                      required 
@@ -73,7 +74,7 @@ const Edit = () => {
                     <label className="w-1/2 text-sm lg:text-base font-bold h-8 py-1" htmlFor="fname" >Full Name</label>
                     <input 
                      onChange={handleChange} 
-                     value={formData.fname}
+                     value={getData.fname}
                      className="text-sm lg:text-base bg-blue-300 focus:bg-lime-300 px-2 h-8 w-1/2" 
                      type="text" 
                      required 
@@ -84,7 +85,7 @@ const Edit = () => {
                     <label className="w-1/2 text-sm lg:text-base font-bold h-8 py-1" htmlFor="dob">Date of Birth</label>
                     <input 
                      onChange={handleChange} 
-                     value={formData.dob}
+                     value={getData.dob}
                      className="text-sm lg:text-base bg-blue-300 focus:bg-lime-300 px-2 h-8 w-1/2" 
                      type="date" 
                      required 
@@ -95,7 +96,7 @@ const Edit = () => {
                     <label className="w-1/2 text-sm lg:text-base font-bold h-8 py-1" htmlFor="gender">Gender</label>
                     <select 
                     onChange={handleChange}
-                    value={formData.gender}
+                    value={getData.gender}
                     className="text-sm lg:text-base bg-blue-300 focus:bg-lime-300 px-2 h-8 w-1/2"  
                     required id="gender" 
                     name="gender">
@@ -108,7 +109,7 @@ const Edit = () => {
                     <label className="w-1/2 text-sm lg:text-base font-bold h-8 py-1" htmlFor="picurl">Profile Picture</label>
                     <input 
                      onChange={handleChange} 
-                     value={formData.picurl}
+                     value={getData.picurl}
                      className="text-sm lg:text-base bg-blue-300 focus:bg-lime-300 px-2 h-8 w-1/2" 
                      type="text" 
                      required 
@@ -121,7 +122,7 @@ const Edit = () => {
             </form>
             <dialog className="fixed top-0 flex-col items-center border rounded-md" style={{display:dialogHidden?'none':'flex'}}>
             <p className="text-xl  px-4 py-2 tracking-wider">Alert !</p>
-            <p className="text-xl  px-4 py-2 tracking-wider">User has been modified successfully</p>
+            <p className="text-xl  px-4 py-2 tracking-wider">User profile has been modified successfully</p>
             </dialog>
         </div>
 
@@ -129,4 +130,4 @@ const Edit = () => {
 
 }
 
-export default Edit;
+export default EditProfile;

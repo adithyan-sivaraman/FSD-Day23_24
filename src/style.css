@@ -644,6 +644,10 @@ video {
   width: 100%;
 }
 
+.w-auto {
+  width: auto;
+}
+
 .max-w-500 {
   max-width: 500px;
 }

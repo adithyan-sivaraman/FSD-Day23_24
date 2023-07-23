@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { getUsers } from "../Api";
 import { Link,useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Dashboard = () => {
     const [users, setUser] = useState([]);
     const nav = useNavigate();
     const loadUsers = async () => {
         const response = await getUsers();
         setUser(response)
-        console.log(response)
+        
     }
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Home = () => {
 
     return (
         <div className="flex flex-col ">
-            <p className="text-lg lg:text-xl font-extrabold px-4 mt-4">User Data</p>
+            <p className="text-lg lg:text-xl font-extrabold px-4 mt-4">Dashboard</p>
             <table className="mt-4 ml-4 mr-4 !border-collapse w-5/6 sm:w-4/5 ">
              <thead>
              <tr className="hover:bg-lime-300 bg-gray-200">
@@ -30,8 +30,9 @@ const Home = () => {
              <th className="text-base lg:text-base border border-white">Name</th>
              <th className="text-base lg:text-base border border-white">DOB</th>
              <th className="text-base lg:text-base border border-white">Gender</th>
-             <th className="text-base lg:text-base border border-white">Image URL</th>
-             <th className="text-base lg:text-base border border-white">Edit</th>
+             <th className="text-base lg:text-base border border-white">Image</th>
+             <th className="text-base lg:text-base border border-white">Edit User</th>
+             <th className="text-base lg:text-base border border-white">View Profile</th>
              
              </tr>
              </thead>
@@ -44,10 +45,15 @@ const Home = () => {
                    <td className="text-base lg:text-base border-2 border-blue-50 px-4 py-1 w-1/6">{user.fname}</td>
                    <td className="text-base lg:text-base border-2 border-blue-50 px-4 py-1 w-1/8">{user.dob}</td>
                    <td className="text-base lg:text-base border-2 border-blue-50 px-4 py-1 w-1/10">{user.gender}</td>
-                   <td className="text-base lg:text-base border-2 border-blue-50 px-4 py-1 w-1/10"><img src={user.picurl} alt="" width="50" height="50"></img></td>
-                   <td className="text-base lg:text-base border-2 border-blue-50 px-4 py-1 w-1/10 text-center">
+                   <td className="text-base lg:text-base border-2 border-blue-50 px-4 py-1 w-1/10 text-center"><img src={user.picurl} alt="" width="120" height="120"></img></td>
+                   <td className="text-base lg:text-base border-2 border-blue-50 py-1 w-1/10 text-center">
                      <Link to={`/user/edit/?id=${user.id}`}>
                        <i className="fa-solid fa-pen-to-square"></i>
+                     </Link>
+                   </td>
+                   <td className="text-base lg:text-base border-2 border-blue-50  py-1 w-1/10  text-center">
+                     <Link to={`/profile/view/?id=${user.id}`}>
+                     <i class="fa-regular fa-eye "></i>
                      </Link>
                    </td>
                  </tr>
@@ -70,4 +76,4 @@ const Home = () => {
 
 }
 
-export default Home;
+export default Dashboard;

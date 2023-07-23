@@ -13,7 +13,7 @@ const response = await fetch (
 
 )
 const data = await response.json()
-console.log(data)
+
 return data;
 }
 
@@ -23,7 +23,7 @@ const response = await fetch(
 )
 
 const data = await response.json()
-console.log(data)
+
 return data;
 }
 
@@ -33,7 +33,7 @@ export const fetchUser = async(id)=>{
     )
     
     const data = await response.json()
-    console.log(data)
+    
     return data;
     }
 
